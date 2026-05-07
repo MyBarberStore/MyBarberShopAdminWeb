@@ -5,18 +5,24 @@ import { EmployeesService } from '../../employees-service';
 import { Table } from '../../../../shared/Components/table/table';
 import Swal from 'sweetalert2';
 import { EmployeeForm } from '../../components/employee-form/employee-form';
+import { AbsenceFormComponent } from '../../components/absence-form/absence-form';
+import { Absence } from '../../../../shared/models/entities/absence';
+import { AbsencesService } from '../../absences-service';
 
 @Component({
   selector: 'app-employees-page',
-  imports: [Card, Table, EmployeeForm],
+  imports: [Card, Table, EmployeeForm, AbsenceFormComponent],
   templateUrl: './employees-page.html',
   styleUrl: './employees-page.css',
 })
 export class EmployeesPage {
   employeeService = inject(EmployeesService);
+  absenceService = inject(AbsencesService);
 
-  showModal = signal<boolean>(false)
-  selectedEmployee = signal<Employee | null>(null)
+  showEmployeesModal = signal<boolean>(false);
+  selectedEmployee = signal<Employee | null>(null);
+  showAbsencesModal = signal<boolean>(false);
+
   
 
   employees = signal<Employee[]>([]);
@@ -76,16 +82,16 @@ export class EmployeesPage {
 
 openModal(){
   this.selectedEmployee.set(null);
-  this.showModal.set(true);
+  this.showEmployeesModal.set(true);
 }
 
 closeModal(){
-  this.showModal.set(false);
+  this.showEmployeesModal.set(false);
 }
 
 openEditModal(employee: Employee) {
     this.selectedEmployee.set(employee);
-    this.showModal.set(true);
+    this.showEmployeesModal.set(true);
   }
 
 handleSave(employee : Employee) {
@@ -100,7 +106,7 @@ handleSave(employee : Employee) {
   // Llamamos al servicio pasando el ID (o 0 si por alguna razón no existe) y el objeto
   employee.id = this.selectedEmployee()?.id
   this.employeeService.updateEmployee(this.selectedEmployee()?.id!, employee).subscribe({
-    next: (updatedEmp) => {
+    next: () => {
       // Notificación de éxito
       Swal.fire('Actualizado', 'Empleado modificado con éxito', 'success');
       
@@ -120,16 +126,29 @@ handleSave(employee : Employee) {
 
   createEmployee(newEmployee: Employee){
     this.employeeService.createEmployee(newEmployee).subscribe(() => {
-      this.loadEmployees(); // Recargas la tabla
-      this.closeModal();    // Cierras el modal
+      this.loadEmployees(); 
+      this.closeModal();    
     });
     
   }
 
-
-  manageAbsences(employee: Employee) {
-    // Aquí podrías abrir una sección para gestionar las ausencias del empleado
-    console.log('Gestionar ausencias para:', employee);
+  openAbsences(employee: Employee) {
+    this.selectedEmployee.set(employee)
+    this.showAbsencesModal.set(true);
   }
+
+  closeAbsences(){
+    this.selectedEmployee.set(null);
+    this.showAbsencesModal.set(false);
+  }
+
+  createAbsence(newAbsence: Absence){
+    this.absenceService.createAbsence(newAbsence).subscribe(() => {
+      Swal.fire('Ausencia programada', 'La ausencia ha sido programada correctamente', 'success');
+      this.closeAbsences();
+    });
+  }
+
+
 
 }

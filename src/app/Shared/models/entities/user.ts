@@ -1,4 +1,4 @@
-// Definimos los roles como un tipo de unión para mayor seguridad
+
 export type UserRole = 'ADMIN' | 'CUSTOMER';
 
 export interface User {
@@ -7,6 +7,6 @@ export interface User {
   email: string;
   telNumber: string;
   role: UserRole;
-  registerDate?: string; 
+  registerDate: string; 
   
 }

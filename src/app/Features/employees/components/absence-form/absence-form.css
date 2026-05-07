@@ -1,0 +1,209 @@
+/* Capa que oscurece el fondo */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Oscurece el fondo al 50% */
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;     /* Centra verticalmente */
+  z-index: 1000;           /* Asegura que esté por encima de todo */
+  backdrop-filter: blur(2px); /* Opcional: añade un ligero desenfoque al fondo */
+}
+
+/* Ajustes al contenedor para que flote */
+.modal-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px; /* Bordes redondeados como en tu imagen */
+  width: 90%;
+  max-width: 700px;
+  max-height: 90vh;    /* Para que no se salga de la pantalla si hay mucha lista */
+  overflow-y: auto;    /* Scroll interno si el contenido es muy largo */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Animación suave para que no aparezca de golpe */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Ajuste adicional para el botón cerrar (la X) */
+.close-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+}
+
+/* Contenedor principal del modal */
+.modal-container {
+  font-family: 'Inter', sans-serif; /* O la que uses en tu proyecto */
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 800px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* Cabecera */
+.header {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.header h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  color: #111;
+}
+
+.employee-name {
+  color: #666;
+  font-size: 1rem;
+  margin-top: 0.2rem;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #999;
+}
+
+/* Sección de Formulario (El cuadro lila) */
+.form-section {
+  background-color: #f9f5ff; /* Color lila muy suave del diseño */
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.form-section h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+  color: #111;
+}
+
+/* Grid de los inputs */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Dos columnas exactas */
+  gap: 1.2rem 2rem; /* Espacio entre filas y columnas */
+}
+
+/* Cada grupo (Label + Input) */
+.form-group {
+  display: flex;
+  flex-direction: column; /* Label arriba, input abajo */
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Estilo de Inputs, Selects y Dates */
+.form-group input, 
+.form-group select {
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: white;
+  color: #374151;
+  width: 100%; /* Para que ocupen todo su hueco del grid */
+  box-sizing: border-box;
+}
+
+/* Botón Añadir (El morado) */
+.actions {
+  display: flex;
+  justify-content: flex-end; /* Lo lleva a la derecha */
+  margin-top: 1.5rem;
+}
+
+.btn-add {
+  background-color: #9333ea; /* Morado intenso */
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-add:hover {
+  background-color: #7e22ce;
+}
+
+/* Lista de Ausencias Programadas */
+.list-section h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.absence-item {
+  background: white;
+  border: 1px solid #f3f4f6;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.badge {
+  background: #e0e7ff;
+  color: #4338ca;
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.reason {
+  font-weight: 600;
+  margin: 0.2rem 0;
+}
+
+.dates {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}

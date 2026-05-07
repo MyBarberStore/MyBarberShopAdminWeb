@@ -7,6 +7,9 @@ import { AppointmentRequest } from '../../../../shared/models/dto/appointment-re
 import { EmployeesService } from '../../../employees/employees-service';
 import { Employee } from '../../../../shared/models/entities/employee';
 import { Table } from '../../../../shared/Components/table/table';
+import { invoiceRequest } from '../../../../shared/models/dto/invoice-request';
+import { BillingService } from '../../../billing/billing-service';
+import { AppointmentStatus } from '../../../../shared/models/entities/appointment';
 
 
 @Component({
@@ -18,6 +21,7 @@ import { Table } from '../../../../shared/Components/table/table';
 export class AppoinmentsPage {
   appointmentService = inject(AppointmentService); 
   employeesService = inject(EmployeesService);
+  billingService = inject(BillingService); // Inyectamos el servicio de facturación para generar la factura al finalizar la cita
 
   appointments = signal<Appointment[]>([]);
   selectedDate = signal<string>(new Date().toISOString().split('T')[0]);
@@ -43,10 +47,22 @@ export class AppoinmentsPage {
   filteredAppointments = computed(() => {
   const appointments = this.appointments();
   const filter = this.filterEmployeeId();
+  let result: Appointment[];
 
-  if (filter === "all") return appointments;
-  
-  return appointments.filter(app => app.employeeId === Number(filter));
+  // 1. Aplicamos el filtro con estructura normal
+  if (filter === "all") {
+    // Hacemos una copia para no mutar el original
+    result = [...appointments];
+  } else {
+    // Filtramos por el ID del empleado
+    result = appointments.filter(app => app.employeeId === Number(filter));
+  }
+
+  // 2. Ordenamos el resultado (da igual si viene filtrado o no)
+  // Usamos localeCompare para que "09:00" vaya antes que "10:30"
+  result.sort((a, b) => a.startTime.localeCompare(b.startTime));
+
+  return result;
 });
 
   
@@ -86,10 +102,6 @@ export class AppoinmentsPage {
   }
 
 
-  onSearch(event: Event) {
-    
-  }
-
   onCancel(appointment: Appointment) {
     Swal.fire({
       title: '¿Estás seguro?',
@@ -102,13 +114,14 @@ export class AppoinmentsPage {
       cancelButtonColor: '#64748b',
 
     }).then((result) => {
+      const appointmentRequest = this.mapToRequest(appointment);
       if (result.isConfirmed) {
-        this.appointmentService.deleteAppointment(appointment.id).subscribe(() => {
-          Swal.fire('Eliminada', 'La cita ha sido eliminada', 'success');
+        this.appointmentService.updateAppointment(appointment.id, { ...appointmentRequest, status: 'CANCELLED' }).subscribe(() => {
+          Swal.fire('Cancelada', 'La cita ha sido cancelada', 'success');
           // Actualiza la lista de citas después de cancelar
           this.onDateChange({ target: { value: this.selectedDate() } });
         }, error => {
-          Swal.fire('Error', 'No se pudo eliminar la cita', 'error');
+          Swal.fire('Error', 'No se pudo cancelar la cita', 'error');
         });
       }
     });
@@ -166,7 +179,70 @@ updateAppointment(appointment: AppointmentRequest) {
     });
 }
 
+  billAppointment(event: Appointment) {
+  // 1. Validación rápida
+  if (event.status === 'COMPLETED') {
+    Swal.fire('No Facturable', 'Esta cita ya ha sido procesada.', 'info');
+    return;
+  }else if (event.status === 'CANCELLED') {
+    Swal.fire('No Facturable', 'No se pueden facturar citas canceladas.', 'info');
+    return;
+  }
 
- 
-  
+  // 2. Diálogo de SweetAlert (Configuración e Interfaz)
+  Swal.fire({
+    title: 'Finalizar Cita',
+    text: `Método de pago para: ${event.customerName}`,
+    icon: 'question',
+    input: 'radio',
+    inputOptions: { 'CASH': 'Efectivo', 'CARD': 'Tarjeta' },
+    inputValidator: (value) => !value ? '¡Debes seleccionar un método!' : null,
+    showCancelButton: true,
+    confirmButtonText: 'Generar Factura',
+    confirmButtonColor: '#28a745'
+  }).then((result) => {
+    if (!result.isConfirmed) return;
+
+    // 3. Flujo Lógico: Primero Factura, luego Actualizar Cita
+    const invoiceReq: invoiceRequest = {
+      appointmentId: event.id,
+      paymentMethod: result.value,
+      total: event.price
+    };
+
+    this.billingService.createInvoice(invoiceReq).subscribe({
+      next: () => {
+        // Solo actualizamos la cita si la factura se creó bien
+        console.log(event.customerId, event.employeeId, event.serviceId);
+        const appointmentReq: AppointmentRequest = {
+          id: event.id,
+          date: event.date,
+          startTime: event.startTime,
+          telNumber: event.telNumber,
+          clientId: event.customerId,
+          employeeId: event.employeeId,
+          serviceId: event.serviceId,
+          status: AppointmentStatus.Completed
+        };
+        //una vez generada factura, se actualiza la cita
+        this.updateAppointment(appointmentReq);
+        Swal.fire('Éxito', 'Factura generada y cita completada', 'success');
+      },
+      error: () => Swal.fire('Error', 'No se pudo generar la factura', 'error')
+    });
+  });
+}
+
+private mapToRequest(appointment: Appointment): AppointmentRequest {
+  return {
+    id: appointment.id,
+    date: appointment.date,
+    startTime: appointment.startTime,
+    telNumber: appointment.telNumber,
+    clientId: appointment.customerId, // Traducimos customerId a clientId
+    employeeId: appointment.employeeId,
+    serviceId: appointment.serviceId,
+    status: appointment.status // El Enum se envía como string automáticamente
+  };
+}
 }

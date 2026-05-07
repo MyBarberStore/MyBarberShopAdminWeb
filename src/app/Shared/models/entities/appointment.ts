@@ -5,6 +5,7 @@ export interface Appointment {
   endTime: string;      // Usually calculated by the backend
   status: AppointmentStatus;
   telNumber: string;
+  price: number;
   
   // IDs for POST/PUT operations
   customerId: number;
@@ -17,4 +18,8 @@ export interface Appointment {
   serviceName: string;
 }
 
-export type AppointmentStatus = 'PENDING' | 'CONFIRMED' | 'COMPLETED' | 'CANCELLED';
+export enum AppointmentStatus {
+  Confirmed = 'CONFIRMED',
+  Completed = 'COMPLETED',
+  Cancelled = 'CANCELLED'
+}

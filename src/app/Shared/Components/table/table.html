@@ -13,9 +13,18 @@
           [style.grid-template-columns]="'repeat(' + (columns().length + 1) + ', 1fr)'">
             @for (col of columns(); track col.key) {
                 @if (col.type === 'date') {
+                  <div>
                   {{item[col.key] | date: 'dd/MM/yy'}}
+                  </div>  
                 }
-                @else {
+
+                @else if (col.type === 'currency') {
+                  <div>
+                  {{item[col.key] }}€
+                  </div>
+                }
+
+                @else if (col.type === undefined) {
                   <div>
                     {{ item[col.key] }}
                   </div>
@@ -26,6 +35,19 @@
                 @if (item.active !== undefined) {
                     <button class="btn-icon special" (click)="onSpecialAction.emit(item)">
                         <i class="fas fa-calendar-times"></i>
+                    </button>
+                }
+
+                @if(item.status !== undefined) {
+            
+                    <button class="btn-icon special" (click)="onSpecialAction.emit(item)">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </button>
+                }
+                
+                @if (item.invoiceNumber !== undefined){
+                    <button class="btn-icon special" (click)="onSpecialAction.emit(item)">
+                        <i class="fas fa-file-download"></i>
                     </button>
                 }
               <button class="btn-icon edit" (click)="onEdit.emit(item)">

@@ -91,7 +91,8 @@ export class AppointmentForm {
     startTime: this.dataInputs.get('time')?.value ?? '',
     telNumber: this.dataInputs.get('phone')?.value ?? '',
     employeeId: Number(this.dataInputs.get('employee')?.value), // Aseguramos que sea número
-    serviceId: Number(this.dataInputs.get('service')?.value ?? 0) 
+    serviceId: Number(this.dataInputs.get('service')?.value ?? 0), 
+    status: this.isEditMode() ? this.appointmentToEdit()!.status : 'CONFIRMED' // Si es edición, mantenemos el estado actual; si es creación, iniciamos como CONFIRMED
   };
 
     this.saved.emit(newAppointment);

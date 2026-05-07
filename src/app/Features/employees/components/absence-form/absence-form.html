@@ -1,0 +1,77 @@
+<div class="modal-overlay">
+  <div class="modal-container">
+    
+    <!-- Cabecera del Modal -->
+    <div class="header">
+      <div class="header-text">
+        <h2>Gestión de Ausencias</h2>
+        <p class="employee-name">{{ employee()?.name }}</p>
+      </div>
+      <button class="close-btn" (click)="onClose()">x</button>
+    </div>
+
+    <!-- Sección del Formulario (Cuadro Lila) -->
+    <form [formGroup]="absenceForm" (ngSubmit)="onSubmit()" class="form-section">
+      <h3>Nueva Ausencia</h3>
+      +
+      <div class="form-grid">
+    
+
+        <!-- Motivo -->
+        <div class="form-group">
+          <label>Motivo *</label>
+          <input type="text" formControlName="reason" placeholder="Ej: Vacaciones de verano">
+        </div>
+
+        <!-- Fecha Inicio -->
+        <div class="form-group">
+          <label>Fecha Inicio *</label>
+          <input type="date" formControlName="startDate">
+        </div>
+
+        <!-- Fecha Fin -->
+        <div class="form-group">
+          <label>Fecha Fin *</label>
+          <input type="date" formControlName="endDate">
+        </div>
+      </div>
+
+      <!-- Botón de acción -->
+      <div class="actions">
+        <button type="submit" class="btn-add" [disabled]="absenceForm.invalid">
+          <span class="plus-icon">+</span> Añadir Ausencia
+        </button>
+      </div>
+    </form>
+
+    <!-- Sección de Lista de Ausencias -->
+    <div class="list-section">
+      <h3>Ausencias Programadas</h3>
+      
+      <div class="absence-list">
+        <!-- Usando la nueva sintaxis de Angular 17+ -->
+        @for (item of scheduledAbsences(); track item.id) {
+          <div class="absence-item">
+            <div class="item-info">
+            
+              <p class="reason">{{ item.reason }}</p>
+              <p class="dates">
+                {{ item.startDate | date:'dd/MM/yyyy' }} - {{ item.endDate | date:'dd/MM/yyyy' }}
+              </p>
+            </div>
+            
+            <button class="delete-btn" (click)="onDelete(item.id)" title="Eliminar ausencia">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+            </button>
+          </div>
+        } @empty {
+          <p class="no-data">No hay ausencias registradas para este empleado.</p>
+        }
+      </div>
+    </div>
+
+  </div>
+</div>

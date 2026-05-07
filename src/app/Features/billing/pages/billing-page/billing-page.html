@@ -1,0 +1,51 @@
+<div class="page-container">
+  <!-- Cabecera -->
+  <div class="header-section">
+    <div class="title-block">
+      <h1>Facturación</h1>
+      <p>Gestiona las facturas y pagos de tu barbería</p>
+    </div>
+  </div>
+
+  <!-- Resumen de Estadísticas (Reutilizando app-card) -->
+  <div class="stats-grid">
+    <app-card 
+      title="Ingresos hoy" 
+      value="{{ incomesPerDay() | currency:'EUR' }}" 
+      iconClass="fas fa-dollar-sign" 
+      iconBgColor="#10b981"> <!-- Verde suave -->
+    </app-card>
+
+    <app-card 
+      title="No sé que poner aqui jaja" 
+      value="lolololol" 
+      iconClass="fas fa-calendar-alt" 
+      iconBgColor="#f59e0b"> <!-- Naranja suave -->
+    </app-card>
+
+    <app-card 
+      title="Facturas emitidas hoy" 
+      value="{{ emittedBills() }}" 
+      iconClass="fas fa-file-invoice" 
+      iconBgColor="#3b82f6"> <!-- Azul suave -->
+    </app-card>
+  </div>
+
+  <!-- Filtros -->
+  <div class="filter-section">
+    <div class="date-input-wrapper">
+      <i class="fas fa-calendar date-icon"></i>
+      <input type="date" class="date-filter" [value]="date()" (change)="onDateChange($event.target.value)">
+    </div>
+  </div>
+
+  <!-- Tabla de Facturas -->
+  <div class="table-section">
+    <app-table 
+      [columns]="invoiceColumns" 
+      [data]="invoices()" 
+      emptyMessage="No hay facturas registradas"
+      (onSpecialAction)="exportPdf($event)">
+    </app-table>
+  </div>
+</div>

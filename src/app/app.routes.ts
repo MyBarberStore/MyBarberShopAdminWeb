@@ -6,33 +6,38 @@ import { authGuard } from './core/auth/auth.guard';
 import { AppoinmentsPage } from './features/appointment/pages/appoinments-page/appoinments-page';
 
 export const routes: Routes = [
-    { 
-        path: 'login',
-        component: Login, 
-        canActivate: [] // No protegemos la ruta de login, cualquiera puede acceder
-    },
+  // 1. Esto manda a cualquiera que entre a la raíz directamente al login
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
 
-    {
-    path: '',
+  { 
+    path: 'login', 
+    component: Login 
+  },
+
+  {
+    path: '', // Este grupo se encarga de las rutas protegidas
     component: Layout,
-    canActivate: [authGuard], // Protegemos la ruta principal con el guard
+    canActivate: [authGuard],
     children: [
-        {
-            path: 'dashboard',
-            loadComponent: () => import('./features/dashboard/pages/dashboard-page/dashboard-page').then(m => m.DashboardPage)
-        },
-
-        {
-            path: 'appointments',
-            loadComponent: () => import('./features/appointment/pages/appoinments-page/appoinments-page').then(m => m.AppoinmentsPage)
-        },
-
-        {
-            path: 'employees',
-            loadComponent: () => import('./features/employees/pages/employees-page/employees-page').then(m => m.EmployeesPage)
-        }
-
-        
+      // Ya no hace falta el redirect aquí porque lo hace el de arriba
+      {
+        path: 'dashboard',
+        loadComponent: () => import('./features/dashboard/pages/dashboard-page/dashboard-page').then(m => m.DashboardPage)
+      },
+      {
+        path: 'appointments',
+        loadComponent: () => import('./features/appointment/pages/appoinments-page/appoinments-page').then(m => m.AppoinmentsPage)
+      },
+      {
+        path: 'employees',
+        loadComponent: () => import('./features/employees/pages/employees-page/employees-page').then(m => m.EmployeesPage)
+      },
+      {
+        path: 'billing',
+        loadComponent: () => import('./features/billing/pages/billing-page/billing-page').then(m => m.BillingPage)
+      },
     ]
-    }
+  },
+
+  { path: '**', redirectTo: 'login' }
 ];

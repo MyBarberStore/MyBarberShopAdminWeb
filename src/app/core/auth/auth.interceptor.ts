@@ -1,4 +1,8 @@
-import { HttpInterceptor, HttpInterceptorFn } from "@angular/common/http";
+import { HttpErrorResponse, HttpInterceptor, HttpInterceptorFn } from "@angular/common/http";
+import { inject } from "@angular/core";
+import { catchError, throwError } from "rxjs";
+import { AuthService } from "./auth-service";
+import { Router } from "@angular/router";
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   // Intentamos obtener el token del localStorage
@@ -21,4 +25,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   // Si no hay token, la petición sigue su curso normal
   return next(req);
+
+  
 };

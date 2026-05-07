@@ -7,12 +7,23 @@
     <button class="btn-primary" (click)="openModal()">+ Nuevo Empleado</button>
   </div>
 
-  @if (showModal()) {
+  @if (showEmployeesModal()) {
     <app-employee-form 
       [employeeToEdit]="selectedEmployee()"
       (close)="closeModal()" 
       (save)="handleSave($event)">
     </app-employee-form>
+  }
+  @if (showAbsencesModal()){
+    <app-absence-form
+    [employee]="selectedEmployee()"
+    (close)="closeAbsences()"
+    (save)="createAbsence($event)"
+
+
+    >
+    
+    </app-absence-form>
   }
 
   <div class="stats-grid">
@@ -36,6 +47,6 @@
   </div>
 
   <app-table [columns]="tableColumns" [data]="employees()" emptyMessage="No hay empleados registrados"
-      (onEdit)="openEditModal($event)" (onDelete)="deleteEmployee($event)" (onSpecialAction)="manageAbsences($event)">
+      (onEdit)="openEditModal($event)" (onDelete)="deleteEmployee($event)" (onSpecialAction)="openAbsences($event)">
     </app-table>
 </div>
