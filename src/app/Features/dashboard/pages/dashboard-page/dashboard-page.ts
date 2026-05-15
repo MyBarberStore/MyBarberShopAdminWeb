@@ -16,7 +16,7 @@ import { DashboardData } from '../../../../shared/models/dto/dashboard-data';
 export class DashboardPage {
   appointmentService = inject(AppointmentService);
   dailyAppointments = signal<Appointment[]>([]);
-  dashboardData = signal<DashboardData>({ employeesNumber: 0, productsNumber: 0, serviceCountDTO: [] });
+  dashboardData = signal<DashboardData>({ employeesNumber: 0, availableSlots: 0, serviceCountDTO: [] });
 
   ngOnInit() {
     const today = new Date().toISOString().split('T')[0];

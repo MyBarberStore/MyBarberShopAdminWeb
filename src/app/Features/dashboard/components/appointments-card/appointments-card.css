@@ -45,6 +45,12 @@ body {
   display: flex;
   flex-direction: column;
   gap: 16px; /* Espacio entre cada cita */
+
+  max-height: 350px;    /* Ajusta esta altura a tu gusto (ej: 3 citas visibles) */
+  overflow-y: auto;     /* Activa el scroll vertical solo cuando sea necesario */
+  padding-right: 12px;  /* Un poco de espacio extra para que el scroll no toque las citas */
+
+
 }
 
 

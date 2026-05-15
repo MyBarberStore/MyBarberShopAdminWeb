@@ -6,7 +6,7 @@ import { authGuard } from './core/auth/auth.guard';
 import { AppoinmentsPage } from './features/appointment/pages/appoinments-page/appoinments-page';
 
 export const routes: Routes = [
-  // 1. Esto manda a cualquiera que entre a la raíz directamente al login
+  // Esto manda a cualquiera que entre a la raíz directamente al login
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 
   { 
@@ -36,6 +36,11 @@ export const routes: Routes = [
         path: 'billing',
         loadComponent: () => import('./features/billing/pages/billing-page/billing-page').then(m => m.BillingPage)
       },
+
+    {
+      path: 'configuration',
+      loadComponent: () => import('./features/configuration/pages/configuration-page/configuration-page').then(m => m.ConfigurationPage)
+    }
     ]
   },
 

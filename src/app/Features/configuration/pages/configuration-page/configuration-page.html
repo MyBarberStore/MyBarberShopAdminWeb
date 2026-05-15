@@ -1,0 +1,173 @@
+<div class="page-container">
+  <div class="header-section">
+    <div class="title-block">
+      <div class="title-with-icon">
+        <h1>Configuración</h1>
+        <i class="fas fa-cog icon-orange"></i>
+      </div>
+      <p>Personaliza la configuración de tu barbería</p>
+    </div>
+  </div>
+
+  <div class="config-content">
+    
+    <div class="config-card">
+      <div class="card-header">
+        <i class="fas fa-globe"></i>
+        <span>Idioma</span>
+      </div>
+      <div class="language-toggle">
+        <button class="lang-btn active">ES Español</button>
+        <button class="lang-btn">GB English</button>
+      </div>
+    </div>
+
+    <div class="config-card">
+      <div class="card-header">
+        <i class="fas fa-clock"></i>
+        <span>Horario de Atención</span>
+      </div>
+      
+      <div class="hours-list">
+  @for (day of daysConfig(); track day.name) {
+    <div class="day-row">
+      <div class="day-header">
+        <input type="checkbox" [id]="day.name" [(ngModel)]="day.isOpen">
+        <label [for]="day.name">{{day.label}}</label>
+      </div>
+
+      @if (!day.isOpen) {
+        <div class="closed-info">Cerrado todo el día</div>
+      } @else {
+        <div class="shifts-container">
+          <div class="shift-row">
+            <input type="checkbox" class="custom-check" [(ngModel)]="day.morning.active">
+            <span class="shift-label">Turno Mañana</span>
+            <div class="time-controls" [style.opacity]="day.morning.active ? 1 : 0.5">
+              <div class="input-box">
+                <span class="prefix">De:</span>
+                <input type="time" class="time-selector" [(ngModel)]="day.morning.startTime" [disabled]="!day.morning.active">
+              </div>
+              <div class="input-box">
+                <span class="prefix">A:</span>
+                <input type="time" class="time-selector" [(ngModel)]="day.morning.endTime" [disabled]="!day.morning.active">
+              </div>
+            </div>
+          </div>
+          
+          <div class="shift-row">
+            <input type="checkbox" class="custom-check" [(ngModel)]="day.afternoon.active">
+            <span class="shift-label">Turno Tarde</span>
+            <div class="time-controls" [style.opacity]="day.afternoon.active ? 1 : 0.5">
+              <div class="input-box">
+                <span class="prefix">De:</span>
+                <input type="time" class="time-selector" [(ngModel)]="day.afternoon.startTime" [disabled]="!day.afternoon.active">
+              </div>
+              <div class="input-box">
+                <span class="prefix">A:</span>
+                <input type="time" class="time-selector" [(ngModel)]="day.afternoon.endTime" [disabled]="!day.afternoon.active">
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>
+
+    <div class="card-actions">
+    <button class="btn-primary" (click)="saveSchedule()">
+        <i class="fas fa-save"></i> Guardar Horario
+    </button>
+    </div>
+ </div>   
+
+    <div class="config-card">
+      <div class="card-header-flex">
+        <div class="card-header">
+          <i class="fas fa-scissors"></i>
+          <span>Servicios</span>
+        </div>
+      </div>
+
+      <table class="config-table">
+        <thead>
+          <tr>
+            <th>Servicio</th>
+            <th>Precio</th>
+            <th>Duración</th>
+            <th class="text-right">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+            @for (item of services(); track $index) {
+            <tr>
+                @if (item.isEditing) {
+                    <td><input class="table-input" [(ngModel)]="item.name"></td>
+                    <td><input type="number" class="table-input" [(ngModel)]="item.price"></td>
+                    <td><input type="number" class="table-input" [(ngModel)]="item.durationMinutes"></td>
+                    <td class="text-right">
+                      <button class="btn-icon save" (click)="updateService(item)">
+                        <i class="fas fa-check"></i>
+                      </button>
+                        <button class="btn-icon delete" (click)="cancelEdit(item)">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </td>
+                }@else {
+                <td>{{item.name}}</td>
+                <td>{{item.price}}€</td>
+                <td>{{item.durationMinutes}} min</td>
+                <td class="text-right">
+                <button class="btn-icon edit" (click)="startEdit(item)">
+                  <i class="fas fa-pen"></i>
+                </button>
+                <button class="btn-icon delete" (click)="deleteService(item)">
+                  <i class="fas fa-trash"></i>
+                </button>
+                </td>
+                }
+                
+            </tr>
+            }
+          
+          <tr class="new-service-row">
+            <td><input placeholder="Nombre del servicio" class="table-input" [(ngModel)]="newService.name"></td>
+            <td><input placeholder="Precio" class="table-input" [(ngModel)]="newService.price"></td>
+            <td><input placeholder="Duración" class="table-input" [(ngModel)]="newService.durationMinutes"></td>
+            <td class="text-right">
+              <button class="btn-icon save" (click)="createService()"><i class="fas fa-save"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="config-card">
+      <div class="card-header">
+        <i class="fas fa-lock"></i>
+        <span>Cambiar Contraseña</span>
+      </div>
+      <div class="password-grid">
+        <div class="form-group">
+          <label>Contraseña Actual</label>
+          <div class="input-with-icon">
+            <input type="password" placeholder="••••••••">
+            <i class="fas fa-eye"></i>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Nueva Contraseña</label>
+          <div class="input-with-icon">
+            <input type="password" placeholder="Mínimo 8 caracteres">
+            <i class="fas fa-eye"></i>
+          </div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-primary">Actualizar Contraseña</button>
+      </div>
+    </div>
+
+  </div> 
+</div> 

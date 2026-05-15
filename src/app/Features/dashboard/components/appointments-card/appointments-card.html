@@ -9,7 +9,7 @@
 
   <div class="citas-body">
       
-    @for (item of appointmentsList(); track $index) {
+    @for (item of sortedAppointments(); track $index) {
         <app-appointment-item [clientName]="item.customerName" [serviceType]="item.serviceName"
          [employeeName]="item.employeeName" [appointmentTime]="item.startTime"></app-appointment-item>
     }

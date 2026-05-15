@@ -45,5 +45,14 @@ export class BillingService {
   getBillingStats(date: string): Observable<billCardsData> {
     return this.http.get<billCardsData>(`${this.apiUrl}/billCards/${date}`);
   }
+
+  downloadReport(month: number, year: number) {
+  return this.http.get(`${this.apiUrl}/report/monthly`, {
+    params: { month, year },
+    responseType: 'blob'
+  });
+}
+
+
   
 }

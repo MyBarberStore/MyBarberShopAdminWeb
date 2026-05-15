@@ -207,3 +207,85 @@
   padding: 0.5rem;
   font-size: 1.2rem;
 }
+
+/* --- RESPONSIVE ABSENCE FORM --- */
+
+@media (max-width: 768px) {
+  .modal-container {
+    padding: 1.5rem; /* Reducimos el padding general */
+    width: 95%;      /* Aprovechamos más el ancho */
+    border-radius: 16px;
+  }
+
+  .header h2 {
+    font-size: 1.4rem; /* Título más acorde al móvil */
+    padding-right: 30px; /* Espacio para que el título no pise la X */
+  }
+
+  /* --- SECCIÓN LILA (FORMULARIO) --- */
+  .form-section {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr; /* Una sola columna para los inputs */
+    gap: 1rem;
+  }
+
+  .form-group input, 
+  .form-group select {
+    font-size: 16px; /* Evita el zoom automático en iOS */
+    padding: 0.8rem;
+  }
+
+  /* --- ACCIONES --- */
+  .actions {
+    margin-top: 1rem;
+  }
+
+  .btn-add {
+    width: 100%; /* Botón morado a ancho completo */
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  /* --- LISTA DE AUSENCIAS --- */
+  .absence-item {
+    flex-direction: column; /* Apilamos la info y el botón de borrar */
+    align-items: flex-start;
+    gap: 1rem;
+    position: relative;
+  }
+
+  .absence-info {
+    width: 100%;
+  }
+
+  .delete-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #fff5f5; /* Un fondo rojizo suave para que se vea mejor el icono */
+    border-radius: 8px;
+  }
+
+  .reason {
+    font-size: 1rem;
+  }
+}
+
+/* Ajuste para móviles muy pequeños */
+@media (max-width: 480px) {
+  .header h2 {
+    font-size: 1.2rem;
+  }
+  
+  .employee-name {
+    font-size: 0.9rem;
+  }
+  
+  .modal-container {
+    padding: 1rem;
+  }
+}

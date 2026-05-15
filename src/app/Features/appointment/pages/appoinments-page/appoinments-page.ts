@@ -37,7 +37,7 @@ export class AppoinmentsPage {
     { label: 'Servicio', key: 'serviceName' },
     { label: 'Fecha', key: 'date', type: 'date'},
     { label: 'Hora', key: 'startTime' },
-    { label: 'Estado', key: 'status' },
+    { label: 'Estado', key: 'status', map: { 'CONFIRMED': 'Confirmada', 'COMPLETED': 'Completada', 'CANCELLED': 'Cancelada' } },
 
   ]
 
@@ -61,7 +61,6 @@ export class AppoinmentsPage {
   // 2. Ordenamos el resultado (da igual si viene filtrado o no)
   // Usamos localeCompare para que "09:00" vaya antes que "10:30"
   result.sort((a, b) => a.startTime.localeCompare(b.startTime));
-
   return result;
 });
 
@@ -103,6 +102,16 @@ export class AppoinmentsPage {
 
 
   onCancel(appointment: Appointment) {
+    if (appointment.status === 'CANCELLED') {
+      Swal.fire('Ya cancelada', 'Esta cita ya ha sido cancelada.', 'info');
+      return;
+    }
+
+    if (appointment.status === 'COMPLETED') {
+      Swal.fire('No cancelable', 'No se pueden cancelar citas completadas.', 'info');
+      return;
+    }
+
     Swal.fire({
       title: '¿Estás seguro?',
       text: 'Esta acción no se puede deshacer',
@@ -166,18 +175,22 @@ saveNewAppointment(appointment: AppointmentRequest) {
 }
 
 updateAppointment(appointment: AppointmentRequest) {
-  this.appointmentService.updateAppointment(appointment.id ?? 0, appointment).subscribe({
-      next: (updatedApp) => {
-        Swal.fire('Actualizada', 'Cita modificada con éxito', 'success');
-        this.onDateChange({ target: { value: this.selectedDate() } }); // Recargamos la lista
-      },
-      error: (err) => {
-        // Aquí capturas el 409 Conflict o el 404
-        const msg = err.error || 'No se pudo actualizar la cita';
-        Swal.fire('Error', msg, 'error');
-      }
-    });
-}
+  if(appointment.status === 'CANCELLED') {
+    Swal.fire('No modificable', 'No se pueden modificar citas canceladas o completadas.', 'info');
+    return;
+  }
+    this.appointmentService.updateAppointment(appointment.id ?? 0, appointment).subscribe({
+        next: (updatedApp) => {
+          Swal.fire('Actualizada', 'Cita modificada con éxito', 'success');
+          this.onDateChange({ target: { value: this.selectedDate() } }); // Recargamos la lista
+        },
+        error: (err) => {
+          // Aquí capturas el 409 Conflict o el 404
+          const msg = err.error || 'No se pudo actualizar la cita';
+          Swal.fire('Error', msg, 'error');
+        }
+      });
+  }
 
   billAppointment(event: Appointment) {
   // 1. Validación rápida

@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { Absence } from '../../../../shared/models/entities/absence';
 import { Employee } from '../../../../shared/models/entities/employee';
 import { AbsencesService } from '../../absences-service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-absence-form',
   standalone: true,
@@ -36,6 +37,12 @@ export class AbsenceFormComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.absenceForm.invalid) {
+      Swal.fire('Formulario incompleto', 'Por favor, rellena todos los campos obligatorios (*)', 'error');
+      this.absenceForm.markAllAsTouched();
+      return;
+    }
+
     const newAbsence: Absence = {
       id: 0, 
       employeeId: this.employee()?.id!,

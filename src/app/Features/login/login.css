@@ -178,3 +178,70 @@ h2 {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* --- RESPONSIVE LOGIN --- */
+
+/* Ajustes para tablets o pantallas medianas */
+@media (max-width: 1024px) {
+  .login-box {
+    width: 90%; /* Dejamos de usar 1000px fijos */
+    height: auto; /* El alto se adapta al contenido */
+    max-width: 900px;
+  }
+
+  .login-form-section {
+    padding: 40px; /* Reducimos un poco el padding interno */
+  }
+}
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+  .login-container {
+    padding: 20px;
+    background-color: #ffffff; /* En móvil podemos preferir fondo blanco puro */
+  }
+
+  .login-box {
+    width: 100%;
+    box-shadow: none; /* Quitamos sombra si el fondo es blanco */
+    border-radius: 0;
+    flex-direction: column; /* Apilamos por si decidimos mostrar algo del visual */
+  }
+
+  /* OCULTAMOS LA IMAGEN EN MÓVIL */
+  /* En pantallas pequeñas, la imagen quita espacio y distrae */
+  .login-visual {
+    display: none; 
+  }
+
+  .login-form-section {
+    padding: 20px 10px;
+    width: 100%;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .subtitle {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  /* Ajuste de inputs para evitar zoom en iOS */
+  .input-wrapper input {
+    font-size: 16px; 
+    padding: 14px 12px 14px 45px; /* Un poco más de altura para dedos */
+  }
+
+  .form-options {
+    flex-direction: column; /* Apilamos 'Recordarme' y 'Olvido contraseña' */
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .btn-login {
+    padding: 16px; /* Botón más grande para pulsar fácil */
+  }
+}

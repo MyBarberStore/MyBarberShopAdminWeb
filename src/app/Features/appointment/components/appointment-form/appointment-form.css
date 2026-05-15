@@ -194,3 +194,62 @@
 .btn-primary:hover {
   background-color: #e67e22;
 }
+
+/* --- RESPONSIVE APPOINTMENT FORM --- */
+
+@media (max-width: 768px) {
+  .modal-container {
+    width: 90%; /* Un poco más de margen en los bordes */
+    max-height: 90vh; /* Evitamos que el modal sea más alto que la pantalla */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-body {
+    padding: 1rem;
+    overflow-y: auto; /* Si el formulario es largo, permite scroll interno */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* El cambio más importante: Las filas ahora son columnas */
+  .form-row {
+    flex-direction: column;
+    gap: 1rem; /* Reducimos un poco el hueco para ahorrar espacio */
+  }
+
+  .form-group label {
+    font-size: 0.8rem; /* Labels un pelín más pequeñas */
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 0.8rem; /* Aumentamos el área de toque */
+    font-size: 16px; /* CRÍTICO: 16px evita que iOS haga zoom automático al enfocar */
+  }
+
+  /* --- FOOTER (Botones) --- */
+  .modal-footer {
+    flex-direction: column-reverse; /* El botón de 'Guardar' arriba del de 'Cancelar' */
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+
+  .btn {
+    width: 100%; /* Botones a ancho completo para el pulgar */
+    padding: 0.9rem;
+    text-align: center;
+  }
+}
+
+/* Ajuste para pantallas muy bajas (móvil en horizontal) */
+@media (max-height: 500px) {
+  .modal-container {
+    top: 10px;
+    transform: none;
+    max-height: 95vh;
+  }
+  
+  .modal-header {
+    padding: 0.5rem 1rem;
+  }
+}

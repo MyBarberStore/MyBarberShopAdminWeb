@@ -12,7 +12,7 @@
     </app-card>
 
     <app-card
-        title="Huecos disponibles" value="4" 
+        title="Huecos disponibles" value="{{ dashboardData()?.availableSlots }}" 
         trendText="+3 desde ayer" iconClass="fas fa-calendar-plus" 
         iconBgColor="#10b981">
     </app-card>
@@ -24,7 +24,7 @@
     </app-card>
 
     <app-card 
-        title="Productos vendidos" value="{{ dashboardData()?.productsNumber }}" 
+        title="Productos vendidos" value="0" 
         iconClass="fas fa-box-open" 
         iconBgColor="#a855f7">
     </app-card>

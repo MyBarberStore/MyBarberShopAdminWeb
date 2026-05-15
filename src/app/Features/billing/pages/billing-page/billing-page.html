@@ -5,6 +5,9 @@
       <h1>Facturación</h1>
       <p>Gestiona las facturas y pagos de tu barbería</p>
     </div>
+    <div class="action-block">
+      <button class="primary-btn" (click)="downloadReport()">Generar informe mensual</button>
+    </div>
   </div>
 
   <!-- Resumen de Estadísticas (Reutilizando app-card) -->
@@ -45,7 +48,10 @@
       [columns]="invoiceColumns" 
       [data]="invoices()" 
       emptyMessage="No hay facturas registradas"
-      (onSpecialAction)="exportPdf($event)">
+      (onSpecialAction)="exportPdf($event)"
+      [showEdit]="false"
+      [showDelete]="false">
+      
     </app-table>
   </div>
 </div>

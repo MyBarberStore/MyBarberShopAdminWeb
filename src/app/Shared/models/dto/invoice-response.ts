@@ -5,5 +5,5 @@ export interface invoiceResponse {
   employeeName: String;
   date: String;
   paymentMethod: String;
-  total: Number;
+  price: Number;
 }

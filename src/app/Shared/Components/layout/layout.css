@@ -11,3 +11,19 @@
   overflow-y: auto; /* Si el dashboard es largo, solo se mueve esta parte */
   background-color: #f8fafc; /* El color gris claro del diseño */
 }
+
+/* --- AJUSTES PARA TABLET (Sidebar de 80px) --- */
+@media (max-width: 1024px) {
+  .main-content {
+    width: calc(100% - 80px);
+  }
+}
+
+/* --- AJUSTES PARA MÓVIL (Sidebar abajo) --- */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0; 
+    width: 100%;   
+    padding-bottom: 80px; 
+  }
+}

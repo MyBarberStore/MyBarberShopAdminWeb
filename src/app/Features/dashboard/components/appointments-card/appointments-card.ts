@@ -1,4 +1,4 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { AppointmentItem } from '../appointment-item/appointment-item';
 import { Appointment } from '../../../../shared/models/entities/appointment';
 import { AppointmentService } from '../../../appointment/appointment-service';
@@ -12,5 +12,13 @@ import { AppointmentService } from '../../../appointment/appointment-service';
 export class AppointmentsCard {
   appointmentService = inject(AppointmentService);
   appointmentsList = input<Appointment[]>([]); 
+  
+  sortedAppointments = computed(() => {
+  return [...this.appointmentsList()].sort((a, b) => 
+    a.startTime.localeCompare(b.startTime)
+  );
+});
+
+
 
 }

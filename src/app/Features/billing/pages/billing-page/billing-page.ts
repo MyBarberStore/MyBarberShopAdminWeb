@@ -24,8 +24,8 @@ invoiceColumns = [
   { label: 'Nº Factura', key: 'invoiceNumber' },
   { label: 'Cliente', key: 'clientName' },
   { label: 'Fecha', key: 'date', type: 'date'  },
-  { label: 'Total', key: 'total', type: 'currency' },
-  { label: 'Método de Pago', key: 'paymentMethod' },
+  { label: 'Total', key: 'price', type: 'currency' },
+  { label: 'Método de Pago', key: 'paymentMethod', map: { 'CASH': 'Efectivo', 'CARD': 'Tarjeta', 'TRANSFER': 'Transferencia' } },
 ];
 
 ngOnInit() {
@@ -78,15 +78,15 @@ loadCards() {
     }); 
   }
 
+  downloadReport() {
+  this.billingService.downloadReport(5, 2026).subscribe(blob => {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Informe_Mensual.pdf`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  });
+}
 
-  downloadInvoice(invoiceId: string) {
-    // Aquí iría la lógica para descargar la factura, por ejemplo:
-    console.log(`Descargando factura ${invoiceId}`);
-    
-  }
-  viewInvoice(invoiceId: string) {
-    // Aquí iría la lógica para ver la factura, por ejemplo:
-    console.log(`Viendo factura ${invoiceId}`);
-    // Puedes abrir un modal o redirigir a una página de detalles 
-  }
 }

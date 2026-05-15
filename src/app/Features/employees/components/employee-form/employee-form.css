@@ -111,3 +111,69 @@ input:focus, select:focus {
   background: #cbd5e1;
   cursor: not-allowed;
 }
+
+/* --- RESPONSIVE EMPLOYEE FORM --- */
+
+@media (max-width: 768px) {
+  .modal-overlay {
+    padding: 10px; /* Evita que el modal toque los bordes del móvil */
+  }
+
+  .modal-card {
+    padding: 1.25rem;
+    max-height: 95vh; /* Evita que se salga por arriba/abajo */
+    overflow-y: auto; /* Permite scroll si el formulario crece */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-header h2 {
+    font-size: 1.25rem;
+  }
+
+  /* --- REJILLA DEL FORMULARIO --- */
+  .form-grid {
+    /* Pasamos de 2 columnas a 1 sola columna */
+    grid-template-columns: 1fr; 
+    gap: 1rem; /* Reducimos un poco el espacio entre campos */
+  }
+
+  .full-width {
+    /* En una sola columna, el span 2 ya no es necesario, pero lo aseguramos */
+    grid-column: span 1;
+    margin-bottom: 1rem;
+  }
+
+  input, select {
+    /* Al igual que en citas, usamos 16px para evitar el zoom de iOS */
+    font-size: 16px;
+    padding: 0.8rem;
+  }
+
+  /* --- FOOTER Y BOTONES --- */
+  .modal-footer {
+    flex-direction: column-reverse; /* Guardar arriba, Cancelar abajo */
+    width: 100%;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .btn-primary, .btn-secondary {
+    width: 100%; /* Botones grandes y fáciles de pulsar */
+    padding: 0.9rem;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* Ajuste para móviles muy pequeños o modo horizontal */
+@media (max-height: 550px) {
+  .modal-header {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  .form-grid {
+    gap: 0.75rem;
+  }
+}

@@ -43,3 +43,56 @@ header p {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
+/* --- RESPONSIVE DASHBOARD --- */
+
+/* Ajustes para Tablets (Pantallas medianas) */
+@media (max-width: 1024px) {
+  .stats-grid {
+    /* Pasamos de 4 columnas a 2 para que las cards no se vean "apretadas" */
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .main-grid {
+    /* Apilamos la sección de citas y la otra columna para que tengan todo el ancho */
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* Ajustes para Móviles (Pantallas pequeñas) */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 1.5rem 1rem; /* Menos margen en los bordes */
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 0.5rem;
+  }
+
+  header h1 {
+    font-size: 1.5rem; /* Título un poco más contenido */
+  }
+
+  .stats-grid {
+    /* En móviles muy pequeños, 1 sola columna para que se lea bien el número */
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .card {
+    padding: 15px; /* Reducimos el padding interno de las tarjetas */
+  }
+}
+
+/* Ajuste extra para móviles muy pequeños (iPhone SE, etc) */
+@media (max-width: 480px) {
+  .stats-grid {
+    /* Si las cards de estadísticas son simples, podrías intentar mantener 2 columnas aquí, 
+       pero 1 columna suele ser lo más seguro para TFG */
+    grid-template-columns: 1fr;
+  }
+}
+

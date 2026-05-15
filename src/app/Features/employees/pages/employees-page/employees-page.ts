@@ -37,7 +37,7 @@ export class EmployeesPage {
   tableColumns = [
     { label: 'Nombre', key: 'name' },
     { label: 'Fecha de alta', key: 'hireDate', type: 'date'},
-    { label: 'Estado', key: 'active'}
+    { label: 'Estado', key: 'active', map: { true: 'Activo', false: 'Inactivo' } },
     
   ];  
 
@@ -142,13 +142,49 @@ handleSave(employee : Employee) {
     this.showAbsencesModal.set(false);
   }
 
-  createAbsence(newAbsence: Absence){
-    this.absenceService.createAbsence(newAbsence).subscribe(() => {
-      Swal.fire('Ausencia programada', 'La ausencia ha sido programada correctamente', 'success');
-      this.closeAbsences();
+  createAbsence(newAbsence: Absence) {
+
+    Swal.fire({
+      title: '¿Confirmar ausencia?',
+      text: `Vas a programar una ausencia para ${this.selectedEmployee()?.name}. Las citas asignadas a ese empleado durante esas fechas se cancelarán automáticamente.`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, programar',
+      cancelButtonText: 'No, cancelar',
+      confirmButtonColor: '#f89900',
+      cancelButtonColor: '#64748b',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.saveAbsence(newAbsence);
+      }
     });
   }
 
 
-
+  saveAbsence(newAbsence: Absence) {
+  this.absenceService.createAbsence(newAbsence).subscribe({
+    // CASO ÉXITO
+    next: () => {
+      Swal.fire('Ausencia programada', 'La ausencia ha sido programada correctamente', 'success');
+      this.closeAbsences();
+    },
+    
+    // CASO ERROR
+    error: (err) => {
+      // Intentamos extraer el mensaje del servidor. 
+      const errorMessage = err.error?.message || err.error || 'Ocurrió un fallo inesperado';
+      
+      Swal.fire({
+        title: 'Error',
+        text: errorMessage,
+        icon: 'error',
+        confirmButtonColor: '#ef4444' // Un rojo vibrante
+      });
+      
+      console.error('Error al crear ausencia:', err);
+    }
+  });
+  }
 }
+
+

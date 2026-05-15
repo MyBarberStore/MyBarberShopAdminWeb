@@ -4,6 +4,9 @@
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  /* Este contenedor permite el scroll */
+  overflow-x: auto; 
+  -webkit-overflow-scrolling: touch;
 }
 
 
@@ -110,4 +113,38 @@
 
 .btn-icon:hover {
   background: #f1f5f9;
+}
+
+/* Forzamos que la tabla no se encoja menos de lo necesario */
+.table-header, .table-row {
+  min-width: 750px; /* Ajusta este valor según cuántas columnas tengas */
+  display: grid;
+  /* El grid que ya tenías definido en tu componente */
+}
+
+/* --- RESPONSIVE TABLE --- */
+
+@media (max-width: 768px) {
+  .page-container {
+    padding: 1rem;
+  }
+
+  /* Estilizamos la barra de scroll para que no sea fea */
+  .table-card::-webkit-scrollbar {
+    height: 6px;
+  }
+  
+  .table-card::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+  }
+
+  /* OPCIONAL: Puedes ocultar columnas "secundarias" en móvil para 
+     que no haya que hacer tanto scroll. Ejemplo: ocultar método de pago */
+  .column-hide-mobile {
+    display: none !important;
+  }
+  
+  /* Ajustamos el grid para compensar la columna oculta si decides usarlo */
+  /* .table-header, .table-row { grid-template-columns: 1fr 1fr 1fr 100px; } */
 }

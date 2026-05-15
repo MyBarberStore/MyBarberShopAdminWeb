@@ -72,3 +72,62 @@
 .stat-label { display: block; color: #64748b; font-size: 0.9rem; }
 .stat-value { font-size: 1.5rem; font-weight: 700; color: #1e293b; }
 
+
+/* --- RESPONSIVE EMPLOYEES PAGE --- */
+
+/* Ajustes para tablets y pantallas medianas */
+@media (max-width: 1024px) {
+  .stats-grid {
+    /* Pasamos de 3 columnas a 2 para que las tarjetas no se estrechen demasiado */
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+  .page-container {
+    padding: 1rem; /* Reducimos el padding para ganar espacio vital */
+  }
+
+  .header-section {
+    flex-direction: column; /* Título arriba, botón abajo */
+    align-items: stretch;   /* El botón ocupará todo el ancho */
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .title-block h1 {
+    font-size: 1.5rem;
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 0.8rem; /* Un poco más de superficie táctil */
+  }
+
+  .stats-grid {
+    /* Una sola columna para que las estadísticas se lean cómodamente */
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1.2rem; /* Ajustamos el aire interno */
+  }
+
+  .stat-value {
+    font-size: 1.3rem; /* Texto un pelín más pequeño para evitar desbordamientos */
+  }
+}
+
+/* Ajuste para móviles muy pequeños */
+@media (max-width: 480px) {
+  .header-section {
+    margin-bottom: 1.5rem;
+  }
+  
+  .icon-box {
+    width: 40px; /* Reducimos un poco el icono si el espacio es crítico */
+    height: 40px;
+  }
+}
