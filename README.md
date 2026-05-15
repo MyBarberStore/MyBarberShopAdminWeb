@@ -1,50 +1,47 @@
-# 💻 BarberPro - Web Admin Panel
+# 💻 BarberPro - Web Admin Suite
 
 ![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![Reactive-Programming](https://img.shields.io/badge/RxJS-B7178C?style=for-the-badge&logo=reactivex&logoColor=white)
 
-**BarberPro Web** es el panel de administración desarrollado en Angular para la gestión integral de la barbería. Permite a los administradores y barberos visualizar la agenda en tiempo real, gestionar citas y controlar el flujo diario de trabajo de manera eficiente.
-
----
-
-## 🚀 Funcionalidades Principales
-
-El panel administrativo ofrece una interfaz limpia y optimizada para la toma de decisiones:
-
-### 1. Dashboard de Citas Diarias
-* **Control de Agenda:** Visualización clara de todas las citas programadas para el día actual.
-* **Orden Cronológico:** Implementación de lógica avanzada (Signals & Computed) para ordenar las citas automáticamente por hora.
-* **Scroll Optimizado:** Contenedores con scroll personalizado para manejar grandes volúmenes de citas sin romper el diseño.
-
-### 2. Gestión de Servicios y Personal
-* **Visualización Dinámica:** Tarjetas de citas detalladas que incluyen cliente, servicio solicitado, barbero asignado y hora.
-* **Arquitectura de Componentes:** Uso de componentes reutilizables (`AppointmentItem`, `AppointmentCard`) para una interfaz consistente.
-
-### 3. Experiencia de Usuario (UX)
-* **Diseño Moderno:** Estética profesional con sombras suaves, bordes redondeados y tipografía clara.
-* **Reactividad:** Uso de **Angular Signals** para una actualización de la interfaz ultra rápida y eficiente.
-* **Responsive Design:** Adaptado para su uso tanto en monitores de oficina como en tablets dentro del local.
+**BarberPro Web** es el centro de control operativo del ecosistema BarberPro. Esta plataforma permite la gestión integral del negocio, desde la monitorización de la agenda diaria hasta el control administrativo de empleados, ausencias y flujos de facturación.
 
 ---
 
-## 🛠️ Stack Tecnológico
+## 🛠️ Funcionalidades Detalladas
 
-* **Framework:** [Angular](https://angular.io/) (Última versión con sintaxis de control flow `@for`).
-* **Lenguaje:** [TypeScript](https://www.typescriptlang.org/).
-* **Estado de la App:** [Angular Signals](https://angular.io/guide/signals) para una gestión reactiva del estado.
-* **Comunicación:** `HttpClient` para el consumo de la API REST de Spring Boot.
-* **Estilos:** CSS3 nativo con metodologías modernas (Flexbox y Grid).
+### 📅 1. Gestión de Citas (Capa Operativa)
+El sistema ofrece un control total sobre el flujo de clientes en el local:
+* **Agenda en Tiempo Real:** Visualización dinámica de las citas del día, consumiendo datos de forma reactiva para asegurar que la información esté siempre actualizada.
+* **Clasificación y Estados:** Gestión de estados de cita (Pendiente, Completada, Cancelada) con feedback visual inmediato.
+* **Ordenación Cronológica Inteligente:** Uso de **Angular Signals** y `computed` para ordenar automáticamente el listado por hora de inicio, facilitando la lectura al personal.
+* **Filtros Avanzados:** Capacidad de filtrar la agenda por barbero o tipo de servicio para una mejor organización interna.
+
+### 👥 2. Gestión de Empleados (Recursos Humanos)
+Módulo completo para la administración del personal de la barbería:
+* **Perfiles de Barbero:** CRUD (Crear, Leer, Actualizar, Borrar) de empleados, incluyendo fotos, especialidades y horarios.
+* **Asignación de Servicios:** Control de qué servicios puede realizar cada empleado (ej. un barbero junior vs. un especialista en barba).
+* **Control de Carga:** Visualización de la cantidad de citas asignadas por profesional para equilibrar el trabajo.
+
+### 🏖️ 3. Gestión de Ausencias y Disponibilidad
+Un motor lógico diseñado para evitar errores en las reservas:
+* **Calendario de Ausencias:** Registro de vacaciones, bajas médicas o días libres.
+* **Bloqueo de Reservas:** Integración directa con el backend para que, si un empleado tiene una ausencia registrada, el sistema de la App Android bloquee automáticamente esas franjas horarias.
+* **Historial de Inasistencias:** Registro histórico para el control administrativo de la empresa.
+
+### 💰 4. Facturación y Reportes (Capa de Negocio)
+Transformación de las citas completadas en datos financieros:
+* **Generación de Facturas:** Integración con el servicio de generación de PDFs. Cada cita completada genera un registro de facturación único.
+* **Consulta de Ingresos:** Visualización del precio total de los servicios realizados.
+* **Exportación de Datos:** Preparación del sistema para la descarga de reportes detallados de actividad económica por periodos de tiempo.
 
 ---
 
-## 📂 Estructura del Proyecto
+## 🏗️ Arquitectura de Software
 
-```text
-src/app/
-├── components/      # Componentes reutilizables (Citas, Cards, Header)
-├── models/          # Interfaces y modelos de datos (Appointment, User)
-├── services/        # Servicios para llamadas a la API (DataService)
-├── pages/           # Vistas principales del panel (Home, Dashboard)
-└── app.config.ts    # Configuración global y rutas
+* **Componentes Standalone:** Arquitectura moderna de Angular para una carga más rápida y modular.
+* **Gestión de Estado (Signals):** Implementación de la nueva reactividad de Angular para minimizar las detecciones de cambios innecesarias y mejorar el rendimiento.
+* **Intercepción de Peticiones:** Uso de `HttpInterceptors` para gestionar el envío de tokens de seguridad y el manejo global de errores de la API.
+* **Services Layer:** Desacoplamiento total entre la lógica de interfaz (componentes) y el consumo de datos (servicios REST).
+
+---
