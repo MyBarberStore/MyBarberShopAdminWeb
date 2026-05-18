@@ -2,7 +2,8 @@ import { inject, Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Service } from '../../shared/models/entities/service';
+import { Service } from '../../sharedx/models/entities/service';
+import { environment } from '../../../environments/environment.development';
 
 
 @Injectable({
@@ -12,7 +13,7 @@ export class serviceService {
   private http = inject(HttpClient);
   
   // Ajusta esta URL a la de tu backend
-  private readonly API_URL = 'http://localhost:8080/services';
+  private readonly API_URL = environment.apiUrl + '/services';
 
   /**
    * Obtiene la lista completa de servicios

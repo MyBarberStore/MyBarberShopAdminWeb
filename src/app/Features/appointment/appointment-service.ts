@@ -1,10 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Appointment } from '../../shared/models/entities/appointment';
-import { DashboardData } from '../../shared/models/dto/dashboard-data';
-import { Service } from '../../shared/models/entities/service';
-import { AppointmentRequest } from '../../shared/models/dto/appointment-request';
+import { Appointment } from '../../sharedx/models/entities/appointment';
+import { DashboardData } from '../../sharedx/models/dto/dashboard-data';
+import { Service } from '../../sharedx/models/entities/service';
+import { AppointmentRequest } from '../../sharedx/models/dto/appointment-request';
+import { environment } from '../../../environments/environment';
 
 
 
@@ -13,7 +14,9 @@ import { AppointmentRequest } from '../../shared/models/dto/appointment-request'
 })
 export class AppointmentService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:8080/appointments';
+  private apiUrl = environment.apiUrl + '/appointments'; 
+
+  
 
 
   createAppointment(appointmentData: AppointmentRequest): Observable<AppointmentRequest> {

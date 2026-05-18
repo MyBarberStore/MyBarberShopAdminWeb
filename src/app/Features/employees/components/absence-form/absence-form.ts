@@ -3,8 +3,8 @@
 import { Component, inject, input, Input, OnInit, output, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Absence } from '../../../../shared/models/entities/absence';
-import { Employee } from '../../../../shared/models/entities/employee';
+import { Absence } from '../../../../sharedx/models/entities/absence';
+import { Employee } from '../../../../sharedx/models/entities/employee';
 import { AbsencesService } from '../../absences-service';
 import Swal from 'sweetalert2';
 @Component({

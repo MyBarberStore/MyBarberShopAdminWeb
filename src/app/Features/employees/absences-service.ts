@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Absence } from '../../shared/models/entities/absence';
+import { Absence } from '../../sharedx/models/entities/absence';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AbsencesService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:8080/absences';
+  private apiUrl = environment.apiUrl + '/absences';
 
   createAbsence(newAbsence: Absence){
     return this.http.post<Absence>(`${this.apiUrl}`, newAbsence);

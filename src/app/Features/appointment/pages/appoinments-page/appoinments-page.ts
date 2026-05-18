@@ -1,15 +1,15 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { AppointmentService } from '../../appointment-service';
-import { Appointment } from '../../../../shared/models/entities/appointment';
+import { Appointment } from '../../../../sharedx/models/entities/appointment';
 import Swal from 'sweetalert2';
 import { AppointmentForm } from '../../components/appointment-form/appointment-form';
-import { AppointmentRequest } from '../../../../shared/models/dto/appointment-request';
+import { AppointmentRequest } from '../../../../sharedx/models/dto/appointment-request';
 import { EmployeesService } from '../../../employees/employees-service';
-import { Employee } from '../../../../shared/models/entities/employee';
-import { Table } from '../../../../shared/componentss/table/table';
-import { invoiceRequest } from '../../../../shared/models/dto/invoice-request';
+import { Employee } from '../../../../sharedx/models/entities/employee';
+import { Table } from '../../../../sharedx/componentss/table/table';
+import { invoiceRequest } from '../../../../sharedx/models/dto/invoice-request';
 import { BillingService } from '../../../billing/billing-service';
-import { AppointmentStatus } from '../../../../shared/models/entities/appointment';
+import { AppointmentStatus } from '../../../../sharedx/models/entities/appointment';
 
 
 @Component({

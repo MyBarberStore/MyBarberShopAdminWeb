@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
-import { Card } from '../../../../shared/componentss/card/card';
-import { Table } from '../../../../shared/componentss/table/table';
-import { invoiceResponse } from '../../../../shared/models/dto/invoice-response';
+import { Card } from '../../../../sharedx/componentss/card/card';
+import { Table } from '../../../../sharedx/componentss/table/table';
+import { invoiceResponse } from '../../../../sharedx/models/dto/invoice-response';
 import { BillingService } from '../../billing-service';
 import sweetalert2 from 'sweetalert2';
 import { CurrencyPipe } from '@angular/common';

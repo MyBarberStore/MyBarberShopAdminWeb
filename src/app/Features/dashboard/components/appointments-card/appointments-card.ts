@@ -1,6 +1,6 @@
 import { Component, computed, inject, input, signal } from '@angular/core';
 import { AppointmentItem } from '../appointment-item/appointment-item';
-import { Appointment } from '../../../../shared/models/entities/appointment';
+import { Appointment } from '../../../../sharedx/models/entities/appointment';
 import { AppointmentService } from '../../../appointment/appointment-service';
 
 @Component({

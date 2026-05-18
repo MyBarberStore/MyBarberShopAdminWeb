@@ -4,7 +4,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-table',
-  imports: [DatePipe, CurrencyPipe],
+  imports: [DatePipe],
   templateUrl: './table.html',
   styleUrl: './table.css',
 })

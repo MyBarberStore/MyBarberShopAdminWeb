@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Employee } from '../../shared/models/entities/employee';
+import { Employee } from '../../sharedx/models/entities/employee';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ import { Employee } from '../../shared/models/entities/employee';
 export class EmployeesService {
 
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:8080/employees';
+  private apiUrl = environment.apiUrl + '/employees';
 
 
   getEmployees(): Observable<Employee[]> {

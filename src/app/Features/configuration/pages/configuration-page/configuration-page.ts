@@ -1,11 +1,11 @@
 import { ChangeDetectorRef, Component, inject, signal } from '@angular/core';
 import Swal from 'sweetalert2';
 import { ShiftService } from '../../shift-service';
-import { DayConfig } from '../../../../shared/models/entities/shifts';
-import { FullScheduleRequest, ShiftRequest } from '../../../../shared/models/dto/schedule';
+import { DayConfig } from '../../../../sharedx/models/entities/shifts';
+import { FullScheduleRequest, ShiftRequest } from '../../../../sharedx/models/dto/schedule';
 import { FormsModule } from '@angular/forms';
 import { AppointmentService } from '../../../appointment/appointment-service';
-import { Service } from '../../../../shared/models/entities/service';
+import { Service } from '../../../../sharedx/models/entities/service';
 import { serviceService } from '../../service-service';
 
 @Component({

@@ -1,17 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { invoiceRequest } from '../../shared/models/dto/invoice-request';
+import { invoiceRequest } from '../../sharedx/models/dto/invoice-request';
 import { Observable } from 'rxjs';
-import { invoiceResponse } from '../../shared/models/dto/invoice-response';
-import { billCardsData } from '../../shared/models/dto/bill-cards-data';
+import { invoiceResponse } from '../../sharedx/models/dto/invoice-response';
+import { billCardsData } from '../../sharedx/models/dto/bill-cards-data';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BillingService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:8080/billing';
-
+  private apiUrl = environment.apiUrl + '/invoices';
   createInvoice(invoiceRequest: invoiceRequest):Observable<invoiceResponse> {
     return this.http.post<invoiceResponse>(`${this.apiUrl}`, invoiceRequest);
   }

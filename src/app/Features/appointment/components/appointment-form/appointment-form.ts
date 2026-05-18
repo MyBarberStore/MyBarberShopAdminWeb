@@ -1,13 +1,13 @@
 import { Component, computed, inject, input, output, signal } from '@angular/core';
 import { form } from '@angular/forms/signals';
-import { Appointment } from '../../../../shared/models/entities/appointment';
-import { AppointmentRequest } from '../../../../shared/models/dto/appointment-request';
+import { Appointment } from '../../../../sharedx/models/entities/appointment';
+import { AppointmentRequest } from '../../../../sharedx/models/dto/appointment-request';
 import { AppointmentService } from '../../appointment-service';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Employee } from '../../../../shared/models/entities/employee';
+import { Employee } from '../../../../sharedx/models/entities/employee';
 import { EmployeesService } from '../../../employees/employees-service';
-import { Service } from '../../../../shared/models/entities/service';
-import { User } from '../../../../shared/models/entities/user';
+import { Service } from '../../../../sharedx/models/entities/service';
+import { User } from '../../../../sharedx/models/entities/user';
 import { UserService } from '../../../../core/services/user-service';
 import { HtmlParser } from '@angular/compiler';
 import Swal from 'sweetalert2';

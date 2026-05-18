@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
-import { AuthResponse } from '../../shared/models/dto/auth';
+import { AuthResponse } from '../../sharedx/models/dto/auth';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment.development';
 
 
 @Injectable({
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:8080/auth';
+  private apiUrl = environment.apiUrl + '/auth';
   private router = inject(Router);
 
 
