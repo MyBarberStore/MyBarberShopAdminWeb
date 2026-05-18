@@ -4,7 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 import { AuthResponse } from '../../shared/models/dto/auth';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
 
 
 @Injectable({
