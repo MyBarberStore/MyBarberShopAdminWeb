@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SideBar } from './sharedx/componentss/side-bar/side-bar';
-import { Layout } from './sharedx/componentss/layout/layout';
+import { SideBar } from './shared/components/side-bar/side-bar';
+import { Layout } from './shared/components/layout/layout';
 
 @Component({
   selector: 'app-root',

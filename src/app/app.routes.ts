@@ -1,9 +1,8 @@
 import { Routes } from '@angular/router';
-import { Layout } from './sharedx/componentss/layout/layout';
-import { DashboardPage } from './features/dashboard/pages/dashboard-page/dashboard-page';
+import { Layout } from './shared/components/layout/layout';
 import { Login } from './features/login/login';
 import { authGuard } from './core/auth/auth.guard';
-import { AppoinmentsPage } from './features/appointment/pages/appoinments-page/appoinments-page';
+
 
 export const routes: Routes = [
   // Esto manda a cualquiera que entre a la raíz directamente al login

@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { User } from '../../sharedx/models/entities/user';
+import { User } from '../../shared/models/entities/user';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
