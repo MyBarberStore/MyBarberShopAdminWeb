@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { Card } from '../../../../shared/Components/card/card';
+import { Card } from '../../../../shared/componentss/card/card';
 import { AppointmentService } from '../../../appointment/appointment-service';
 import { Appointment } from '../../../../shared/models/entities/appointment';
 import { AppointmentsCard } from '../../components/appointments-card/appointments-card';

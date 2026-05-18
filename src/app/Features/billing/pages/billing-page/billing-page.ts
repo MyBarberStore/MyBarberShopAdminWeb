@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
-import { Card } from '../../../../shared/Components/card/card';
-import { Table } from '../../../../shared/Components/table/table';
+import { Card } from '../../../../shared/componentss/card/card';
+import { Table } from '../../../../shared/componentss/table/table';
 import { invoiceResponse } from '../../../../shared/models/dto/invoice-response';
 import { BillingService } from '../../billing-service';
 import sweetalert2 from 'sweetalert2';

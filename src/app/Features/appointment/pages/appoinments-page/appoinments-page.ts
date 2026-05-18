@@ -6,7 +6,7 @@ import { AppointmentForm } from '../../components/appointment-form/appointment-f
 import { AppointmentRequest } from '../../../../shared/models/dto/appointment-request';
 import { EmployeesService } from '../../../employees/employees-service';
 import { Employee } from '../../../../shared/models/entities/employee';
-import { Table } from '../../../../shared/Components/table/table';
+import { Table } from '../../../../shared/componentss/table/table';
 import { invoiceRequest } from '../../../../shared/models/dto/invoice-request';
 import { BillingService } from '../../../billing/billing-service';
 import { AppointmentStatus } from '../../../../shared/models/entities/appointment';

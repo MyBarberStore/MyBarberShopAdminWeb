@@ -1,8 +1,8 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { Card } from '../../../../shared/Components/card/card';
+import { Card } from '../../../../shared/componentss/card/card';
 import { Employee } from '../../../../shared/models/entities/employee';
 import { EmployeesService } from '../../employees-service';
-import { Table } from '../../../../shared/Components/table/table';
+import { Table } from '../../../../shared/componentss/table/table';
 import Swal from 'sweetalert2';
 import { EmployeeForm } from '../../components/employee-form/employee-form';
 import { AbsenceFormComponent } from '../../components/absence-form/absence-form';
