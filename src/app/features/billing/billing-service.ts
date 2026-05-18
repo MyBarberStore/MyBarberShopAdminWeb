@@ -11,7 +11,7 @@ import { environment } from '../../../environments/environment';
 })
 export class BillingService {
   private http = inject(HttpClient);
-  private apiUrl = environment.apiUrl + '/invoices';
+  private apiUrl = environment.apiUrl + '/billing';
   createInvoice(invoiceRequest: invoiceRequest):Observable<invoiceResponse> {
     return this.http.post<invoiceResponse>(`${this.apiUrl}`, invoiceRequest);
   }
