@@ -1,59 +1,47 @@
-# BarberStore
+# 💻 BarberPro - Web Admin Suite
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.5.
+![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Reactive-Programming](https://img.shields.io/badge/RxJS-B7178C?style=for-the-badge&logo=reactivex&logoColor=white)
 
-## Development server
+**BarberPro Web** es el centro de control operativo del ecosistema BarberPro. Esta plataforma permite la gestión integral del negocio, desde la monitorización de la agenda diaria hasta el control administrativo de empleados, ausencias y flujos de facturación.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## 🛠️ Funcionalidades Detalladas
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### 📅 1. Gestión de Citas (Capa Operativa)
+El sistema ofrece un control total sobre el flujo de clientes en el local:
+* **Agenda en Tiempo Real:** Visualización dinámica de las citas del día, consumiendo datos de forma reactiva para asegurar que la información esté siempre actualizada.
+* **Clasificación y Estados:** Gestión de estados de cita (Pendiente, Completada, Cancelada) con feedback visual inmediato.
+* **Ordenación Cronológica Inteligente:** Uso de **Angular Signals** y `computed` para ordenar automáticamente el listado por hora de inicio, facilitando la lectura al personal.
+* **Filtros Avanzados:** Capacidad de filtrar la agenda por barbero o tipo de servicio para una mejor organización interna.
 
-## Code scaffolding
+### 👥 2. Gestión de Empleados (Recursos Humanos)
+Módulo completo para la administración del personal de la barbería:
+* **Perfiles de Barbero:** CRUD (Crear, Leer, Actualizar, Borrar) de empleados, incluyendo fotos, especialidades y horarios.
+* **Asignación de Servicios:** Control de qué servicios puede realizar cada empleado (ej. un barbero junior vs. un especialista en barba).
+* **Control de Carga:** Visualización de la cantidad de citas asignadas por profesional para equilibrar el trabajo.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### 🏖️ 3. Gestión de Ausencias y Disponibilidad
+Un motor lógico diseñado para evitar errores en las reservas:
+* **Calendario de Ausencias:** Registro de vacaciones, bajas médicas o días libres.
+* **Bloqueo de Reservas:** Integración directa con el backend para que, si un empleado tiene una ausencia registrada, el sistema de la App Android bloquee automáticamente esas franjas horarias.
+* **Historial de Inasistencias:** Registro histórico para el control administrativo de la empresa.
 
-```bash
-ng generate component component-name
-```
+### 💰 4. Facturación y Reportes (Capa de Negocio)
+Transformación de las citas completadas en datos financieros:
+* **Generación de Facturas:** Integración con el servicio de generación de PDFs. Cada cita completada genera un registro de facturación único.
+* **Consulta de Ingresos:** Visualización del precio total de los servicios realizados.
+* **Exportación de Datos:** Preparación del sistema para la descarga de reportes detallados de actividad económica por periodos de tiempo.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## 🏗️ Arquitectura de Software
 
-## Building
+* **Componentes Standalone:** Arquitectura moderna de Angular para una carga más rápida y modular.
+* **Gestión de Estado (Signals):** Implementación de la nueva reactividad de Angular para minimizar las detecciones de cambios innecesarias y mejorar el rendimiento.
+* **Intercepción de Peticiones:** Uso de `HttpInterceptors` para gestionar el envío de tokens de seguridad y el manejo global de errores de la API.
+* **Services Layer:** Desacoplamiento total entre la lógica de interfaz (componentes) y el consumo de datos (servicios REST).
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
