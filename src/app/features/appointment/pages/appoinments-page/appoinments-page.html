@@ -41,10 +41,6 @@
     </div>
   </section>
 
-  <div class="search-container">
-    <i class="fas fa-search"></i>
-    <input type="text" placeholder="Buscar por cliente, teléfono o servicio...">
-  </div>
 
   <app-table [columns]="tableColumns" [data]="filteredAppointments()" emptyMessage="No hay citas programadas para esta fecha"
       (onEdit)="openEditModal($event)" (onDelete)="onCancel($event)" (onSpecialAction)="billAppointment($event)"> 
