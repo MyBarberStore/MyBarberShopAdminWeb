@@ -46,6 +46,7 @@ export class Login {
         this.router.navigate(['/dashboard']); 
       } else{
         console.log('Usuario autenticado pero sin rol de admin. Redirigiendo a página de usuario...');
+        this.errorMessage.set('Acceso denegado. Solo los administradores pueden acceder al panel de control.');
       }
     },
     error: (err) => {
@@ -58,7 +59,7 @@ export class Login {
       } else if (err.status === 404) {
         this.errorMessage.set('Usuario no encontrado.');
       } else if (err.status === 0) {
-        this.errorMessage.set('Error de red o CORS: El servidor no responde.');
+        this.errorMessage.set('El servidor no responde.');
       } else {
         this.errorMessage.set('Ha ocurrido un error inesperado. Inténtalo de nuevo.');
       }
